@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>New game</h1>
+
+  <%# convert array of letters into separate letters to display them %>
+  <ul class= "letters">
+    <% @letters.each do |letter| %>
+      <li><%= letter %></li>
+    <% end %>
+  </ul>
+
+  <p>What is the longest word you can find?</p>
+
+  <form action="/score" method="post" data-turbo="false">
+      <%# We will also disable for now a Rails feature which ajaxifies post requests sent from forms. Your HTML form tag should look like this: %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%# we need to pass this as an hidden field tag to allow letters array to be accessed from other methods:  %>
+      <%= hidden_field_tag :letters, @letters %>
+      <div class="input-group">
+        <input class="form-control" type="text" name="word">
+        <input class="btn btn-primary" type="submit" value="Play">
+      </div>
+  </form>
+</div>
